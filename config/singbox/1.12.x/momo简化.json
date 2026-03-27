@@ -2,16 +2,30 @@
   "dns": {
     "servers": [
       {
-        "tag": "adg-dns",
+        "tag": "local",
+        "type": "udp",
+        "server": "192.168.123.99",
+        "server_port": 54,
+        "detour": "🎯 全球直连"
+      },
+      {
+        "tag": "foreign",
         "type": "udp",
         "server": "192.168.123.99",
         "server_port": 54,
         "detour": "🎯 全球直连"
       }
     ],
+    "rules": [
+      {"clash_mode": "direct", "server": "local"},
+      {"query_type": ["HTTPS"], "action": "reject"},
+      {"domain_suffix": ["services.googleapis.cn", "googleapis.cn", "xn--ngstr-lra8j.com"], "server": "foreign"},
+      {"rule_set": ["geosite-cn", "geosite-steamcn", "geosite-apple"], "server": "local"}
+    ],
+    "final": "foreign",
     "strategy": "ipv4_only",
     "independent_cache": true,
-    "reverse_mapping": true
+    "reverse_mapping": false
   },
   "outbounds": [
     {"tag": "🚀 默认代理", "type": "selector", "outbounds": ["🇭🇰 香港手动", "🇯🇵 日本手动", "🇸🇬 狮城手动", "🇺🇲 美国手动", "🐸 手动选择", "♻️ 自动选择"]},
