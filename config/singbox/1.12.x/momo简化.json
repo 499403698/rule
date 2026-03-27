@@ -2,9 +2,10 @@
   "dns": {
     "servers": [
       {
-        "tag": "adg",
-        "address": "192.168.123.99",
-        "port": 54,
+        "tag": "adg-dns",
+        "type": "udp",
+        "server": "192.168.123.99",
+        "server_port": 54,
         "detour": "🎯 全球直连"
       }
     ],
